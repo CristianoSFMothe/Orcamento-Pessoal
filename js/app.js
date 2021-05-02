@@ -30,6 +30,11 @@ function registerExpense() {
         value.value
     )
 
-    console.log(expense)
+    // Fazendo a presistencia dos artibutos dentro do Local Storage
+    record(expense)
 
+}
+
+function record(e) {
+    localStorage.setItem('expense' , JSON.stringify(e))
 }
