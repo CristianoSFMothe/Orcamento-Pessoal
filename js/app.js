@@ -1,86 +1,89 @@
 class Expense {
-    constructor(year, month, day, type, description, value) {
-        this.year = year
-        this.month = month
-        this.day = day
-        this.type = type
-        this.description = description
-        this.value = value
-    }
+	constructor(year, month, day, type, description, value) {
+		this.year = year
+		this.month = month
+		this.day = day
+		this.type = type
+		this.description = description
+		this.value = value
+	}
 
-    validadeDate(){
-        for(let i in this) {
-            if(this[i] == undefined || this[i] == '' || this[i] == null ) {
-                return false
-            }
-        }
-
-        return true
-    }
+	validadeDate() {
+		for(let i in this) {
+			if(this[i] == undefined || this[i] == '' || this[i] == null) {
+				return false
+			}
+		}
+		return true
+	}
 }
 
-// classe responsavel por sauva as informações
 class Bd {
 
-    // Criando o ID
-    constructor() {
-        let id = localStorage.getItem('id')
+	constructor() {
+		let id = localStorage.getItem('id')
 
-        if(id === null) {
-            localStorage.setItem('id', 0)
-        }
-    }
+		if(id === null) {
+			localStorage.setItem('id', 0)
+		}
+	}
 
-    getNextId() {
-        let nextId = localStorage.getItem('id')  
-        return parseInt(nextId) + 1
-    }
-    
+	getNextId() {
+		let proximoId = localStorage.getItem('id')
+		return parseInt(proximoId) + 1
+	}
 
-    record(e) {
-        
-        let id = this.getNextId()
-        
-        localStorage.setItem(id , JSON.stringify(e))
+	save(d) {
+		let id = this.getNextId()
 
-        localStorage.setItem('id', id)
-    }
+		localStorage.setItem(id, JSON.stringify(d))
 
+		localStorage.setItem('id', id)
+	}
 }
 
 let bd = new Bd()
 
+
 function registerExpense() {
-    
-    // Recuperando os valores do campo
-    let year = document.getElementById('year')
-    let month = document.getElementById('month')
-    let day = document.getElementById('day')
-    let type = document.getElementById('type')
-    let description = document.getElementById('description')
-    let value = document.getElementById('value')
 
-    
+	let year = document.getElementById('year')
+	let month = document.getElementById('month')
+	let day = document.getElementById('day')
+	let type = document.getElementById('type')
+	let description = document.getElementById('description')
+	let value = document.getElementById('value')
 
-    let expense = new Expense(
-        year.value, 
-        month.value, 
-        day.value, 
-        type.value, 
-        description.value, 
-        value.value
-    )
+	let expense = new Expense(
+		year.value, 
+		month.value, 
+		day.value, 
+		type.value, 
+		description.value,
+		value.value
+	)
 
-    // Fazendo a presistencia dos artibutos dentro do Local Storage
-    if (expense.validadeDate()) {
 
-        // bd.record(expense)
-        // dialog de sucesso
-        console.log('Dados válidos')
-    } else {
-        // dialog de erro
-        console.log('Dados inválidos')
-    }
+	if(expense.validadeDate()) {
+		// bd.save(expense)
 
+		document.getElementById('modal_title').innerHTML = 'Registro inserido com sucesso'
+		document.getElementById('modal_title_div').className = 'modal-header text-success'
+		document.getElementById('modal_context').innerHTML = 'Expense foi cadastrada com sucesso!'
+		document.getElementById('modal_btn').innerHTML = 'Voltar'
+		document.getElementById('modal_btn').className = 'btn btn-success'
+
+		//dialog de sucesso
+		$('#modalRegisterExpense').modal('show') 
+	} else {
+		
+		document.getElementById('modal_title').innerHTML = 'Erro na inclusão do registro'
+		document.getElementById('modal_title_div').className = 'modal-header text-danger'
+		document.getElementById('modal_context').innerHTML = 'Erro na gravação, verifique se todos os campos foram preenchidos corretamente!'
+		document.getElementById('modal_btn').innerHTML = 'Voltar e corrigir'
+		document.getElementById('modal_btn').className = 'btn btn-danger'
+
+		//dialog de erro
+		$('#modalRegisterExpense').modal('show') 
+	}
 }
-
