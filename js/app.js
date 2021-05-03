@@ -7,6 +7,16 @@ class Expense {
         this.description = description
         this.value = value
     }
+
+    validadeDate(){
+        for(let i in this) {
+            if(this[i] == undefined || this[i] == '' || this[i] == null ) {
+                return false
+            }
+        }
+
+        return true
+    }
 }
 
 // classe responsavel por sauva as informações
@@ -62,7 +72,15 @@ function registerExpense() {
     )
 
     // Fazendo a presistencia dos artibutos dentro do Local Storage
-    bd.record(expense)
+    if (expense.validadeDate()) {
+
+        // bd.record(expense)
+        // dialog de sucesso
+        console.log('Dados válidos')
+    } else {
+        // dialog de erro
+        console.log('Dados inválidos')
+    }
 
 }
 
