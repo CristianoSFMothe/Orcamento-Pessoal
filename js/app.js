@@ -9,6 +9,37 @@ class Expense {
     }
 }
 
+// classe responsavel por sauva as informações
+class Bd {
+
+    // Criando o ID
+    constructor() {
+        let id = localStorage.getItem('id')
+
+        if(id === null) {
+            localStorage.setItem('id', 0)
+        }
+    }
+
+    getNextId() {
+        let nextId = localStorage.getItem('id')  
+        return parseInt(nextId) + 1
+    }
+    
+
+    record(e) {
+        
+        let id = this.getNextId()
+        
+        localStorage.setItem(id , JSON.stringify(e))
+
+        localStorage.setItem('id', id)
+    }
+
+}
+
+let bd = new Bd()
+
 function registerExpense() {
     
     // Recuperando os valores do campo
@@ -31,10 +62,7 @@ function registerExpense() {
     )
 
     // Fazendo a presistencia dos artibutos dentro do Local Storage
-    record(expense)
+    bd.record(expense)
 
 }
 
-function record(e) {
-    localStorage.setItem('expense' , JSON.stringify(e))
-}
