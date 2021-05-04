@@ -65,7 +65,53 @@ class Bd {
 	}
 
 	search(expense) {
+
+		let expenseFilter = Array()
+
+		expenseFilter = this.recoverAllRecords()
+
 		console.log(expense)
+
+		console.log(expenseFilter)
+
+		
+		if(expense.year != '') {
+
+			console.log('filtro de ano')
+			expenseFilter =  expenseFilter.filter(e => e.year == expense.year)
+		}
+		
+		if(expense.month != '') {
+
+			console.log('filtro de mês')
+			expenseFilter =  expenseFilter.filter(e => e.month == expense.month)
+		}
+
+		if(expense.day != '') {
+
+			console.log('filtro de dia')
+			expenseFilter =  expenseFilter.filter(e => e.day == expense.day)
+		}
+
+		if(expense.type != '') {
+
+			console.log('filtro de tipo')
+			expenseFilter =  expenseFilter.filter(e => e.type == expense.type)
+		}
+
+		if(expense.description != '') {
+
+			console.log('filtro de descrição')
+			expenseFilter =  expenseFilter.filter(e => e.description == expense.description)
+		}
+
+		if(expense.value != '') {
+
+			console.log('filtro de valor')
+			expenseFilter =  expenseFilter.filter(e => e.value == expense.value)
+		}
+
+		console.log(expenseFilter)
 	}
 }
 
@@ -171,5 +217,5 @@ function searchExpense() {
 
 	let expense = new Expense(year, month, day, type, description, value)
 
-	bd.search(expense)
+	bd.search(expense )
 }
