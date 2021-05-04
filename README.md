@@ -1,4 +1,4 @@
-# Orcamento Pessoal
+# Orçamento Pessoal
 
 Um projeto de um site para pode salvar algumas das despesas do dia-a-dia
 
