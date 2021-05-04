@@ -40,6 +40,29 @@ class Bd {
 
 		localStorage.setItem('id', id)
 	}
+
+	recoverAllRecords() {
+
+		// array de despesas
+		let expenses = Array()
+		let id = localStorage.getItem('id')
+
+		// recuperar todas as despesas cadastradas em localStorage
+		for(let i = 1; i <= id; i++){
+
+			// Recupera as despesas
+			let expense = JSON.parse(localStorage.getItem(i))
+
+			// Verificando se existe a possibildiade de haver índices que foram pulados/ removidos. Nestes casos iremos pular esse índice
+			if(expense === null) {
+				continue
+			}
+
+			expenses.push(expense)
+		}
+
+		return expenses
+	}
 }
 
 let bd = new Bd()
@@ -65,7 +88,7 @@ function registerExpense() {
 
 
 	if(expense.validadeDate()) {
-		// bd.save(expense)
+		bd.save(expense)
 
 		document.getElementById('modal_title').innerHTML = 'Registro inserido com sucesso'
 		document.getElementById('modal_title_div').className = 'modal-header text-success'
@@ -88,6 +111,13 @@ function registerExpense() {
 	}
 }
 
-function loadListExpense () {
+function loadListExpense() {
 
+	let expenses = Array()
+
+	expenses = bd.recoverAllRecords() 
+
+	console.log(expenses)
+	
+	
 }
