@@ -96,7 +96,6 @@ function registerExpense() {
 		document.getElementById('modal_btn').innerHTML = 'Voltar'
 		document.getElementById('modal_btn').className = 'btn btn-success'
 
-		//dialog de sucesso
 		$('#modalRegisterExpense').modal('show')
 	} else {
 
@@ -106,7 +105,6 @@ function registerExpense() {
 		document.getElementById('modal_btn').innerHTML = 'Voltar e corrigir'
 		document.getElementById('modal_btn').className = 'btn btn-danger'
 
-		//dialog de erro
 		$('#modalRegisterExpense').modal('show')
 	}
 }
