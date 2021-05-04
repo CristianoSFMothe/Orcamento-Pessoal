@@ -88,6 +88,6 @@ function registerExpense() {
 	}
 }
 
-function loadingListExpense () {
+function loadListExpense () {
 
 }
