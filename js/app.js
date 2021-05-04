@@ -87,3 +87,7 @@ function registerExpense() {
 		$('#modalRegisterExpense').modal('show') 
 	}
 }
+
+function loadingListExpense () {
+
+}
