@@ -80,7 +80,7 @@ class Bd {
 			console.log('filtro de ano')
 			expenseFilter =  expenseFilter.filter(e => e.year == expense.year)
 		}
-		
+
 		if(expense.month != '') {
 
 			console.log('filtro de mês')
@@ -111,7 +111,7 @@ class Bd {
 			expenseFilter =  expenseFilter.filter(e => e.value == expense.value)
 		}
 
-		console.log(expenseFilter)
+		return expenseFilter
 	}
 }
 
@@ -166,14 +166,16 @@ function registerExpense() {
 	}
 }
 
-function loadListExpense() {
+function loadListExpense(expenses = Array(), filter = false) {
 
-	let expenses = Array()
+	if(expenses.length == 0 && filter == false) {
 
-	expenses = bd.recoverAllRecords()
+		expenses = bd.recoverAllRecords()
+	}
 
 	// Selecionando o elemento tbody da tabela
 	let listExpenses = document.getElementById('listExpenses')
+	listExpenses.innerHTML = ''
 
 	// Percorrer o array despensas, listando cada despesa de forma dinâmica
 	expenses.forEach(function(e) {
@@ -217,5 +219,9 @@ function searchExpense() {
 
 	let expense = new Expense(year, month, day, type, description, value)
 
-	bd.search(expense )
+	let expenses = 	bd.search(expense)
+
+	
+	loadListExpense(expenses, true)
+
 }
