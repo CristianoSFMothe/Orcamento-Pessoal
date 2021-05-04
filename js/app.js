@@ -97,6 +97,13 @@ function registerExpense() {
 		document.getElementById('modal_btn').className = 'btn btn-success'
 
 		$('#modalRegisterExpense').modal('show')
+
+		year.value = ''
+		month.value = ''
+		day.value = ''
+		type.value = ''
+		description.value = ''
+		value.value = ''
 	} else {
 
 		document.getElementById('modal_title').innerHTML = 'Erro na inclusão do registro'
