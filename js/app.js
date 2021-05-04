@@ -63,6 +63,10 @@ class Bd {
 
 		return expenses
 	}
+
+	search(expense) {
+		console.log(expense)
+	}
 }
 
 let bd = new Bd()
@@ -132,8 +136,7 @@ function loadListExpense() {
 		let line = listExpenses.insertRow()
 
 		// Criando as colonuas (td)
-		 line.insertCell(0).innerHTML =  e.day + '/' + e.month + '/' + e.year
-		//  '${e.day}/${e.month}/${e.year}'
+		 line.insertCell(0).innerHTML =  `${e.day}/${e.month}/${e.year}`
 		
 		// Ajustando o tipo
 		switch(e.type) {
@@ -156,16 +159,17 @@ function loadListExpense() {
 		 line.insertCell(2).innerHTML = e.description
 		 line.insertCell(3).innerHTML = e.value
 	})
+}
 
-	/*
+function searchExpense() {
+	let year = document.getElementById('year').value
+	let month = document.getElementById('month').value
+	let day = document.getElementById('day').value
+	let type = document.getElementById('type').value
+	let description = document.getElementById('description').value
+	let value = document.getElementById('value').value
 
-	 <tr>
-                <td>15/03/2018</td>
-                <td>Alimentação</td>
-                <td>Compras do mês</td>
-                <td>444.75</td>
-              </tr>
-	*/
+	let expense = new Expense(year, month, day, type, description, value)
 
-
+	bd.search(expense)
 }
