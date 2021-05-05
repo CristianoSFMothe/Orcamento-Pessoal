@@ -58,6 +58,7 @@ class Bd {
 				continue
 			}
 
+			expense.id = i
 			expenses.push(expense)
 		}
 
@@ -112,6 +113,10 @@ class Bd {
 		}
 
 		return expenseFilter
+	}
+
+	remover(id) {
+		localStorage.removeItem(id)
 	}
 }
 
@@ -206,6 +211,25 @@ function loadListExpense(expenses = Array(), filter = false) {
 		 line.insertCell(1).innerHTML = e.type
 		 line.insertCell(2).innerHTML = e.description
 		 line.insertCell(3).innerHTML = e.value
+
+		//  Criar o botão de exclusão
+		let btn = document.createElement("button")
+		btn.className = 'btn btn-danger'
+		btn.innerHTML = '<i class="fas fa-times"></i>'
+		btn.id = `id_expense_${e.id}`
+		btn.onclick = function() {
+			
+			let id = this.id.replace('id_expense_', '')
+			
+			// alert(id)
+
+			bd.remover(this.id)
+
+			window.location.reload()
+		}
+		line.insertCell(4).append(btn)
+
+		console.log(e)
 	})
 }
 
