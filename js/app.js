@@ -147,7 +147,7 @@ function registerExpense() {
 
 		document.getElementById('modal_title').innerHTML = 'Registro inserido com sucesso'
 		document.getElementById('modal_title_div').className = 'modal-header text-success'
-		document.getElementById('modal_context').innerHTML = 'Expense foi cadastrada com sucesso!'
+		document.getElementById('modal_context').innerHTML = 'Despesa foi cadastrada com sucesso!'
 		document.getElementById('modal_btn').innerHTML = 'Voltar'
 		document.getElementById('modal_btn').className = 'btn btn-success'
 
